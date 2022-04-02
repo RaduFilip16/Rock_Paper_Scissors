@@ -1,4 +1,4 @@
-
+console.log("Game starts");
 
 function computerPlay(){
     let random = Math.floor(Math.random() * 3);
