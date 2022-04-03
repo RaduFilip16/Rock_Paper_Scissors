@@ -38,11 +38,10 @@ function playRound(playerSelection, computerSelection){
 
 }
 
+ /*
 function game(){
     let scorePlayer = 0;
     let scoreComputer = 0;
-    while(scorePlayer < 5 && scoreComputer < 5){
-        playerSelection = window.prompt('Rock, paper or scissors?','rock');
         if (playerSelection.toLowerCase() != 'rock' && playerSelection.toLowerCase() != 'paper' && playerSelection.toLowerCase() != 'scissors'){
             console.log("Not a valid move! I'll choose for you");
             playerSelection = computerPlay();
@@ -57,9 +56,9 @@ function game(){
         } else if (round.split("!")[0] === "Draw"){
             console.log('Draw!');
         }
-
     }
-    let status = 'Equality';
+
+   let status = 'Equality';
     if(scorePlayer > scoreComputer){
         status = 'You Won the Game';
     } else if(scoreComputer > scorePlayer){
@@ -69,8 +68,120 @@ function game(){
                             You ${scorePlayer}
                             Computer ${scoreComputer} `);
 }
+*/
 
-game();
+const btnRock = document.querySelector('#rock');
+const btnScissors = document.querySelector('#scissors');
+const btnPaper = document.querySelector('#paper');
+const msg = document.querySelector('.message');
+const scr = document.querySelector('.scorecard');
+const winnercard = document.querySelector('.winnercard');
+
+function scorecard(mesg, scrplayer, scrcomputer){
+    msg.textContent = mesg;
+    scr.textContent =  `The score is 
+                        You ${scrplayer} - ${scrcomputer} Computer`;
+}
+function showWinner(message){
+    winnercard.textContent = message;
+}
+
+let game = 0;
+let round = '';
+ let scorePlayer = 0;
+ let scoreComputer = 0;
+ let mesaj = "Make you choice";
+ scorecard(mesaj, scorePlayer, scoreComputer);
+
+                       
+
+btnRock.addEventListener('click', function(){
+    if(scorePlayer == 5 || scoreComputer == 5){
+        scorePlayer = 0;
+        scoreComputer = 0;
+        showWinner('');
+    }
+
+    round = playRound('rock',computerPlay());
+
+    if (round.split("!")[0] === "You Lose"){
+        scoreComputer++;
+        if(scoreComputer == 5){
+            showWinner("YOU LOST THE GAME");
+        }
+        scorecard(round, scorePlayer, scoreComputer);
+
+    } else if(round.split("!")[0] ===  "You Win"){
+        scorePlayer++;
+        if(scorePlayer == 5){
+            showWinner("YOU WON THE GAME");
+        }
+            scorecard(round, scorePlayer, scoreComputer);
+    }
+
+  else if (round.split("!")[0] === "Draw"){
+        scorecard(round,scorePlayer, scoreComputer);
+
+}
+
+
+    });
+
+btnScissors.addEventListener('click', function(){  
+    if(scorePlayer == 5 || scoreComputer == 5){
+        scorePlayer = 0;
+        scoreComputer = 0;
+        showWinner('');
+    }
+    round = playRound('scissors',computerPlay());
+
+    if (round.split("!")[0] === "You Lose"){
+        scoreComputer++;
+        if(scoreComputer == 5){
+            showWinner("YOU LOST THE GAME");
+        }
+        scorecard(round, scorePlayer, scoreComputer);
+
+    } else if(round.split("!")[0] === "You Win"){ 
+        scorePlayer++;
+        if(scorePlayer == 5){
+            showWinner("YOU WON THE GAME");
+}
+        scorecard(round, scorePlayer, scoreComputer);
+    }
+    else if (round.split("!")[0] === "Draw"){
+        scorecard(round,scorePlayer, scoreComputer);
+    }
+});
+
+
+
+
+btnPaper.addEventListener('click', function(){ 
+    if(scorePlayer == 5 || scoreComputer == 5){
+        scorePlayer = 0;
+        scoreComputer = 0;
+        showWinner('');
+    }
+     round = playRound('paper', computerPlay());
+     if (round.split("!")[0] === "You Lose"){
+        scoreComputer++;
+        if(scoreComputer == 5){
+            showWinner("YOU LOST THE GAME");
+        }
+        scorecard(round, scorePlayer, scoreComputer);
+
+    } else if(round.split("!")[0] === "You Win"){
+        scorePlayer++;
+        if(scorePlayer == 5){
+            showWinner("YOU WON THE GAME");
+}
+        scorecard(round, scorePlayer, scoreComputer);
+    }
+    else if (round.split("!")[0] === "Draw"){
+        scorecard(round,scorePlayer, scoreComputer);
+    }
+});
 
 
 
